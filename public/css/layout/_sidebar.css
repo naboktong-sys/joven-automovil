@@ -1,0 +1,148 @@
+/* ========================================
+   LAYOUT - Main Sidebar (REDESIGNED)
+   ======================================== */
+
+.main-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+}
+
+/* Sidebar Content - NO TOP PADDING, START IMMEDIATELY */
+.main-sidebar .sidebar {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: var(--space-xl);
+    padding-top: 0; /* NO PADDING - Start immediately */
+    margin-top: 60px; /* Push down by header height */
+}
+
+/* Scrollbar Styling untuk Sidebar */
+.main-sidebar .sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.main-sidebar .sidebar::-webkit-scrollbar-track {
+    background: var(--navy-dark);
+}
+
+.main-sidebar .sidebar::-webkit-scrollbar-thumb {
+    background: var(--gray-medium);
+    border-radius: 3px;
+}
+
+.main-sidebar .sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-light);
+}
+
+/* Sidebar Mini Mode */
+.sidebar-mini.sidebar-collapse .main-sidebar {
+    width: 60px;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar .user-panel-info,
+.sidebar-mini.sidebar-collapse .main-sidebar .menu-text,
+.sidebar-mini.sidebar-collapse .main-sidebar .header-text,
+.sidebar-mini.sidebar-collapse .main-sidebar .header-line {
+    display: none;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar .user-panel {
+    padding: var(--space-md);
+    justify-content: center;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar .menu-link {
+    justify-content: center;
+    padding: 12px;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar .menu-icon {
+    margin-right: 0;
+}
+
+/* Content Wrapper Adjustment */
+body:not(.sidebar-collapse) .content-wrapper,
+body:not(.sidebar-collapse) .main-header,
+body:not(.sidebar-collapse) .main-footer {
+    margin-left: 250px;
+}
+
+body.sidebar-collapse .content-wrapper,
+body.sidebar-collapse .main-header,
+body.sidebar-collapse .main-footer {
+    margin-left: 60px;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 767px) {
+    .main-sidebar {
+        transform: translateX(-250px);
+    }
+    
+    body.sidebar-open .main-sidebar {
+        transform: translateX(0);
+    }
+    
+    body.sidebar-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .content-wrapper,
+    .main-header,
+    .main-footer {
+        margin-left: 0 !important;
+    }
+}
+
+/* Smooth transition for all elements */
+.content-wrapper,
+.main-header,
+.main-footer {
+    transition: margin-left var(--transition-normal);
+}
+
+/* ========================================
+   SIDEBAR HEADER - Reduce Gap
+   ======================================== */
+
+/* Logo Area (tetap di header, bukan di sidebar) */
+.main-header .logo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 60px;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* User Panel - FLUSH WITH LOGO, NO GAP */
+.main-sidebar .user-panel {
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+}

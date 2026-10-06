@@ -1,0 +1,71 @@
+/* =========================================================================
+   CRITICAL LAYOUT - HIGHEST PRIORITY
+   File ini harus dimuat paling akhir untuk override semua CSS
+   ========================================================================= */
+
+/* FORCE SIDEBAR TO LEFT - CRITICAL */
+body .main-sidebar,
+body.skin-blue .main-sidebar,
+body.hold-transition .main-sidebar,
+.wrapper .main-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 250px !important;
+    height: 100vh !important;
+    transform: none !important;
+    display: block !important;
+}
+
+/* FORCE HEADER POSITION */
+body .main-header,
+body.skin-blue .main-header,
+.wrapper .main-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 250px !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+    width: auto !important;
+}
+
+/* FORCE CONTENT POSITION */
+body .content-wrapper,
+.wrapper .content-wrapper {
+    margin-left: 250px !important;
+    margin-top: 50px !important;
+    padding-top: 0 !important;
+}
+
+/* FORCE FOOTER POSITION */
+body .main-footer,
+.wrapper .main-footer {
+    margin-left: 250px !important;
+    position: relative !important;
+    left: auto !important;
+}
+
+/* LOGO IN SIDEBAR */
+body .main-header .logo,
+.wrapper .main-header .logo {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 250px !important;
+    height: 50px !important;
+}
+
+/* NAVBAR ADJUSTMENT */
+body .main-header .navbar,
+.wrapper .main-header .navbar {
+    margin-left: 0 !important;
+}
+
+/* SIDEBAR CONTENT SCROLLABLE */
+body .main-sidebar .sidebar,
+.wrapper .main-sidebar .sidebar {
+    padding-top: 50px !important;
+    height: calc(100vh - 50px) !important;
+    overflow-y: auto !important;
+}

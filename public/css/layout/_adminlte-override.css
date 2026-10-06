@@ -1,0 +1,171 @@
+/* ========================================
+   ADMINLTE OVERRIDES
+   Override default AdminLTE styles
+   ======================================== */
+
+/* Reset AdminLTE default sidebar positioning */
+.skin-blue .main-sidebar,
+.main-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 250px !important;
+}
+
+/* Reset AdminLTE header positioning */
+.skin-blue .main-header,
+.main-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 250px !important;
+    right: 0 !important;
+}
+
+/* Reset AdminLTE content wrapper */
+.content-wrapper {
+    margin-left: 250px !important;
+    margin-top: 0 !important;
+    padding-top: 70px !important;
+}
+
+/* Reset AdminLTE footer */
+.main-footer {
+    margin-left: 250px !important;
+}
+
+/* Sidebar Collapse State */
+.sidebar-collapse .main-sidebar {
+    width: 60px !important;
+}
+
+.sidebar-collapse .main-header,
+.sidebar-collapse .content-wrapper,
+.sidebar-collapse .main-footer {
+    margin-left: 60px !important;
+    left: 60px !important;
+}
+
+/* Mobile Override */
+@media (max-width: 767px) {
+    .main-sidebar {
+        left: -250px !important;
+        transition: left 0.3s ease-in-out !important;
+    }
+    
+    .sidebar-open .main-sidebar {
+        left: 0 !important;
+    }
+    
+    .main-header,
+    .content-wrapper,
+    .main-footer {
+        left: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* Fix AdminLTE Logo */
+.main-header .logo {
+    position: absolute !important;
+    left: -250px !important;
+    width: 250px !important;
+    top: 0 !important;
+    height: 50px !important;
+}
+
+.sidebar-collapse .main-header .logo {
+    left: -60px !important;
+    width: 60px !important;
+}
+
+@media (max-width: 767px) {
+    .main-header .logo {
+        position: relative !important;
+        left: 0 !important;
+        width: 230px !important;
+    }
+}
+
+/* Fix Navbar */
+.main-header .navbar {
+    margin-left: 0 !important;
+}
+
+/* Override AdminLTE skin colors */
+.skin-blue .main-header .navbar {
+    background-color: var(--white) !important;
+}
+
+.skin-blue .main-header .navbar .nav > li > a {
+    color: var(--navy-dark) !important;
+}
+
+.skin-blue .main-header .logo {
+    background-color: var(--navy-dark) !important;
+    color: var(--white) !important;
+    border-bottom: 0 !important;
+}
+
+.skin-blue .main-header .logo:hover {
+    background-color: var(--navy-medium) !important;
+}
+
+/* Sidebar Menu Override */
+.skin-blue .sidebar-menu > li.header,
+.sidebar-menu > li.header {
+    background: transparent !important;
+    color: var(--gray-medium) !important;
+}
+
+.skin-blue .sidebar-menu > li > a,
+.sidebar-menu > li > a {
+    border-left: 3px solid transparent !important;
+}
+
+.skin-blue .sidebar-menu > li.active > a,
+.sidebar-menu > li.active > a {
+    border-left-color: var(--accent-blue) !important;
+}
+
+/* User Panel Fix */
+.skin-blue .user-panel {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Treeview Menu */
+.sidebar-menu .treeview-menu {
+    padding-left: 20px !important;
+}
+
+.sidebar-menu .treeview-menu > li > a {
+    padding-left: 40px !important;
+}
+
+/* Fix z-index issues */
+.main-sidebar {
+    z-index: 1000 !important;
+}
+
+.main-header {
+    z-index: 1001 !important;
+}
+
+.main-footer {
+    z-index: 999 !important;
+}
+
+/* Content adjustment */
+.content-wrapper {
+    background-color: #f4f6f9 !important;
+    min-height: calc(100vh - 130px) !important;
+}
+
+/* Box shadows */
+.main-sidebar {
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.main-header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}

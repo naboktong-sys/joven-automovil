@@ -1,0 +1,51 @@
+/* ========================================
+   AUTH PAGE OVERRIDE
+   Override AdminLTE default auth styles
+   ======================================== */
+
+/* Force navy background on entire page */
+html,
+body,
+body.hold-transition,
+body.login-page,
+body.hold-transition.login-page {
+    background: #1a1f3a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+}
+
+/* Remove AdminLTE default login-page background */
+body.hold-transition.login-page {
+    background: linear-gradient(135deg, #1a1f3a 0%, #2c3e50 25%, #34495e 50%, #2c3e50 75%, #1a1f3a 100%) !important;
+    background-size: 400% 400% !important;
+    background-attachment: fixed !important;
+}
+
+/* Remove AdminLTE default login-box styling */
+.hold-transition.login-page .login-box {
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.hold-transition.login-page .login-box-body {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Fix AdminLTE input styling on login page */
+.login-page .form-control {
+    border-radius: 8px !important;
+}
+
+/* iCheck styling override for dark background */
+.login-box-body .icheck_square-blue,
+.login-box-body .icheckbox_square-blue {
+    margin-right: 8px;
+}
+
+/* Remove any default margins from AdminLTE */
+.login-page .login-box-msg {
+    display: none;
+}

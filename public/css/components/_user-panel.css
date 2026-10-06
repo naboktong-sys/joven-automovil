@@ -1,0 +1,71 @@
+/* ========================================
+   COMPONENT - User Panel (Sidebar)
+   ======================================== */
+
+.user-panel {
+    padding: var(--space-lg);
+    background: var(--overlay-light);
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.user-panel-avatar {
+    position: relative;
+}
+
+.user-panel-avatar img {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--border-medium);
+    border-radius: var(--radius-circle);
+}
+
+.user-status-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background: var(--success);
+    border: 2px solid var(--navy-dark);
+    border-radius: var(--radius-circle);
+}
+
+.user-panel-info {
+    flex: 1;
+    color: var(--gray-lightest);
+}
+
+.user-panel-name {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: var(--font-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--white);
+}
+
+.user-panel-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-sm);
+    color: var(--gray-light);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: var(--radius-circle);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1; 
+    }
+    50% { 
+        opacity: 0.5; 
+    }
+}

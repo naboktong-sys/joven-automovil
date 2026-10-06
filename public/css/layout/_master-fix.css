@@ -1,0 +1,90 @@
+/* ========================================
+   MASTER LAYOUT ADJUSTMENTS
+   Fix spacing and alignment issues
+   ======================================== */
+
+/* Fix content header structure */
+.content-wrapper > .content-header {
+    min-height: auto;
+    padding: 15px 20px;
+}
+
+.content-wrapper > .content-header h1 {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.content-wrapper > .content-header .breadcrumb {
+    float: none;
+    display: inline-flex;
+    margin-left: auto;
+}
+
+/* Fix header user info positioning */
+.main-header .navbar-custom-menu > .navbar-nav > li {
+    position: relative;
+}
+
+.main-header .navbar-custom-menu > .navbar-nav > li > a {
+    padding: 0;
+}
+
+/* Prevent navbar items from wrapping */
+.main-header .navbar {
+    flex-wrap: nowrap;
+}
+
+/* Fix dropdown positioning */
+.navbar-custom-menu .user-menu .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+    top: 100%;
+}
+
+/* Better spacing for content */
+.content-wrapper > .content {
+    padding: 20px;
+}
+
+/* Fix breadcrumb alignment on mobile */
+@media (max-width: 767px) {
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    
+    .content-header h1 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .content-header .breadcrumb {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+}
+
+/* Ensure proper z-index hierarchy */
+.main-header {
+    z-index: 1030 !important;
+}
+
+.main-header .navbar-custom-menu .dropdown-menu {
+    z-index: 1040 !important;
+}
+
+/* Fix for AdminLTE conflicts */
+.skin-blue .main-header .navbar {
+    background-color: transparent !important;
+}
+
+.skin-blue .main-header .navbar .nav > li > a {
+    color: var(--navy-dark) !important;
+}
+
+.skin-blue .main-header .navbar .nav > li > a:hover {
+    background: rgba(52, 152, 219, 0.05) !important;
+}

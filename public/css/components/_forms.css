@@ -1,0 +1,432 @@
+/* ========================================
+   IMPROVED FORMS - Proporsional & Modern
+   Navy Blue Theme - FIXED VERSION
+   ======================================== */
+
+/* ===== MODAL IMPROVEMENTS ===== */
+.modal-dialog.modal-lg {
+    max-width: 650px !important; /* Lebih proporsional dari default 900px */
+    margin: 30px auto;
+}
+
+.modern-modal {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+/* ===== MODAL HEADER ===== */
+.modern-modal .modal-header {
+    background: linear-gradient(135deg, var(--navy-medium) 0%, var(--navy-dark) 100%);
+    color: var(--white);
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: none;
+    position: relative;
+}
+
+.modern-modal .modal-title {
+    font-size: var(--font-xl);
+    font-weight: var(--weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white) !important;
+}
+
+.modern-modal .modal-title i {
+    font-size: 22px;
+    color: var(--white) !important;
+}
+
+/* Pastikan semua text di header berwarna putih */
+.modern-modal .modal-header *,
+.modal-header h4,
+.modal-header .title-text {
+    color: var(--white) !important;
+}
+
+.close-button {
+    position: absolute;
+    right: var(--space-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--overlay-medium);
+    border: none;
+    color: var(--white) !important;
+    opacity: 0.8;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-circle);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    background: var(--overlay-dark);
+    transform: translateY(-50%) rotate(90deg);
+    opacity: 1;
+}
+
+/* ===== MODAL BODY ===== */
+.modern-modal .modal-body {
+    padding: var(--space-xl);
+    background: var(--white);
+}
+
+/* ===== FORM GROUPS ===== */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: var(--font-md);
+    font-weight: var(--weight-semibold);
+    color: var(--navy-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Label di modal body harus navy dark */
+.modern-modal .modal-body .form-label {
+    color: var(--navy-dark) !important;
+}
+
+.form-label.required::after {
+    content: '*';
+    color: var(--danger);
+    margin-left: 4px;
+}
+
+.form-label i,
+.modern-modal .modal-body .form-label i {
+    color: var(--accent-blue) !important;
+    font-size: var(--font-md);
+}
+
+/* ===== MODERN INPUT GROUP ===== */
+.input-group-modern {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: var(--gray-medium);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+}
+
+.input-icon i {
+    font-size: 16px;
+}
+
+.modern-input,
+.modern-select {
+    width: 100%;
+    padding: 12px 15px 12px 45px !important; /* Ruang untuk icon */
+    font-size: var(--font-md);
+    border: 2px solid var(--gray-lightest);
+    border-radius: 8px;
+    transition: var(--transition-normal);
+    background: var(--white);
+    color: var(--navy-dark) !important;
+    line-height: 1.5;
+    height: auto !important;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.modern-input:focus,
+.modern-select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px var(--accent-blue-light);
+    background: var(--white);
+}
+
+.modern-input::placeholder {
+    color: var(--gray-medium);
+}
+
+/* ===== SELECT STYLING ===== */
+.modern-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2395a5a6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 45px !important;
+    cursor: pointer;
+}
+
+.modern-select option,
+select option {
+    padding: 10px;
+    color: var(--navy-dark) !important;
+    background: var(--white) !important;
+}
+
+/* ===== FIX DROPDOWN "TAMPILKAN ... DATA" ===== */
+.dataTables_length select {
+    padding: 6px 30px 6px 12px !important;
+    font-size: 14px !important;
+    border: 1px solid var(--gray-lightest) !important;
+    border-radius: 4px !important;
+    background-color: var(--white) !important;
+    color: var(--navy-dark) !important;
+    height: 34px !important;
+    line-height: 1.5 !important;
+    min-height: auto !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3748' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 8px center !important;
+    cursor: pointer !important;
+}
+
+.dataTables_length label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--navy-dark);
+    font-weight: normal;
+}
+
+/* ===== FORM ROWS (2 COLUMNS) ===== */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-bottom: 24px;
+}
+
+.form-col-2 {
+    /* Each column in the grid */
+}
+
+/* ===== IMAGE UPLOAD ===== */
+.image-upload-wrapper {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+}
+
+.image-preview {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed var(--gray-lightest);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f7fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-normal);
+}
+
+.image-preview:hover {
+    border-color: var(--accent-blue);
+    background: #edf2f7;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.upload-control {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.upload-control input[type="file"] {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-md);
+    border: 2px solid var(--gray-lightest);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.upload-control input[type="file"]:hover {
+    border-color: var(--accent-blue);
+}
+
+.upload-control .text-muted {
+    font-size: var(--font-sm);
+    color: var(--gray-dark);
+    margin-top: 4px;
+}
+
+/* ===== NUMBER INPUTS ===== */
+input[type="number"].modern-input {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"].modern-input::-webkit-outer-spin-button,
+input[type="number"].modern-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ===== MODAL FOOTER ===== */
+.modern-modal .modal-footer {
+    padding: var(--space-lg) var(--space-xl);
+    background: #f7fafc;
+    border-top: 1px solid var(--gray-lightest);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* ===== BUTTONS ===== */
+.btn-save,
+.btn-cancel {
+    padding: 11px 24px;
+    font-size: var(--font-md);
+    font-weight: var(--weight-semibold);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 110px;
+    justify-content: center;
+}
+
+/* Button Simpan - SOLID COLOR (no gradient) */
+.btn-save,
+.btn.btn-primary,
+button[type="submit"].btn-primary {
+    background: var(--accent-blue) !important;
+    background-image: none !important;
+    color: var(--white) !important;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.btn-save:hover,
+.btn.btn-primary:hover,
+button[type="submit"].btn-primary:hover {
+    background: #2980b9 !important;
+    background-image: none !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
+}
+
+.btn-save:active,
+.btn.btn-primary:active,
+button[type="submit"].btn-primary:active {
+    background: #2573a7 !important;
+    background-image: none !important;
+    transform: translateY(0);
+}
+
+.btn-cancel {
+    background: var(--gray-lightest);
+    color: var(--navy-medium);
+}
+
+.btn-cancel:hover {
+    background: var(--gray-light);
+}
+
+/* ===== HELP BLOCK / ERRORS ===== */
+.help-block {
+    display: block;
+    margin-top: 6px;
+    font-size: var(--font-sm);
+    color: var(--danger);
+}
+
+.help-block.with-errors:empty {
+    display: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .modal-dialog.modal-lg {
+        max-width: 95%;
+        margin: 15px auto;
+    }
+
+    .modern-modal .modal-body {
+        padding: var(--space-lg);
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .image-upload-wrapper {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .image-preview {
+        margin: 0 auto;
+    }
+
+    .modern-modal .modal-footer {
+        flex-direction: column-reverse;
+        gap: 8px;
+    }
+
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
+    }
+}
+
+/* ===== ANIMATION ===== */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal.fade .modal-dialog {
+    animation: modalSlideIn var(--transition-normal);
+}
+
+/* ===== FOCUS STATES ===== */
+.modern-input:focus + .input-icon,
+.modern-select:focus ~ .input-icon {
+    color: var(--accent-blue);
+}
+
+/* ===== DISABLED STATE ===== */
+.modern-input:disabled,
+.modern-select:disabled {
+    background: #f7fafc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}

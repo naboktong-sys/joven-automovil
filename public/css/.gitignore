@@ -1,0 +1,20 @@
+# CSS Directory Git Configuration
+
+# Jangan ignore file-file CSS yang sudah di-commit
+!*.css
+
+# Jika ada file temporary atau backup
+*.css.bak
+*.css.tmp
+*.css.old
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

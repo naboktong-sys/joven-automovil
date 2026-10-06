@@ -1,0 +1,72 @@
+/* ========================================
+   VARIABLES - Color Palette & Configuration
+   ======================================== */
+
+:root {
+    /* Primary Navy Blue Colors */
+    --navy-dark: #1a1f3a;
+    --navy-medium: #2c3e50;
+    --navy-light: #34495e;
+    --navy-darker: #0f1419;
+    --navy-lighter: #4a5f7f;
+    
+    /* Accent Colors */
+    --accent-blue: #3498db;
+    --accent-blue-light: rgba(52, 152, 219, 0.2);
+    
+    /* Status Colors */
+    --success: #2ecc71;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --info: #3498db;
+    
+    /* Neutral Colors */
+    --white: #ffffff;
+    --gray-lightest: #ecf0f1;
+    --gray-light: #bdc3c7;
+    --gray-medium: #95a5a6;
+    --gray-dark: #7f8c8d;
+    
+    /* Overlay & Transparency */
+    --overlay-light: rgba(255, 255, 255, 0.05);
+    --overlay-medium: rgba(255, 255, 255, 0.08);
+    --overlay-dark: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.2);
+    
+    /* Spacing */
+    --space-xs: 5px;
+    --space-sm: 10px;
+    --space-md: 15px;
+    --space-lg: 20px;
+    --space-xl: 30px;
+    
+    /* Border Radius */
+    --radius-sm: 3px;
+    --radius-md: 5px;
+    --radius-lg: 10px;
+    --radius-circle: 50%;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+    
+    /* Font Sizes */
+    --font-xs: 10px;
+    --font-sm: 12px;
+    --font-md: 14px;
+    --font-lg: 16px;
+    --font-xl: 18px;
+    
+    /* Font Weights */
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+}

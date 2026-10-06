@@ -1,0 +1,101 @@
+/* ========================================
+   VIEWPORT FIX - Handle Zoom & Scaling
+   ======================================== */
+
+/* Prevent white background on zoom */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    background: #1a1f3a;
+    overflow-x: hidden;
+}
+
+body.login-page {
+    width: 100%;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background: linear-gradient(135deg, #1a1f3a 0%, #2c3e50 25%, #34495e 50%, #2c3e50 75%, #1a1f3a 100%);
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* iOS Safari fix */
+@supports (-webkit-touch-callout: none) {
+    body.login-page {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Prevent layout shift on zoom */
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Ensure content is always centered */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Prevent content overflow on small zoom */
+@media (max-height: 600px) {
+    .login-page {
+        overflow-y: auto;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+}
+
+/* Fix for browser zoom levels */
+@media (min-resolution: 120dpi) and (max-resolution: 144dpi) {
+    .login-box {
+        transform: scale(0.95);
+    }
+}
+
+@media (min-resolution: 145dpi) and (max-resolution: 192dpi) {
+    .login-box {
+        transform: scale(0.9);
+    }
+}
+
+@media (min-resolution: 193dpi) {
+    .login-box {
+        transform: scale(0.85);
+    }
+}
+
+/* Prevent white gaps on ultra-wide screens */
+@media (min-aspect-ratio: 21/9) {
+    body.login-page {
+        background-size: cover;
+    }
+}
+
+/* Fix for portrait orientation */
+@media (orientation: portrait) and (max-width: 768px) {
+    .login-container {
+        max-width: 90%;
+    }
+}

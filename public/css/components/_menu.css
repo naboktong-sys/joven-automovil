@@ -1,0 +1,132 @@
+/* ========================================
+   COMPONENT - Sidebar Menu (REDESIGNED)
+   ======================================== */
+
+.sidebar-menu {
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+}
+
+.menu-item {
+    margin: 2px 0;
+    list-style: none;
+}
+
+.menu-item.active > .menu-link {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #3498db;
+    color: #fff;
+}
+
+.menu-item.highlight > .menu-link {
+    background: linear-gradient(90deg, rgba(52, 152, 219, 0.2), transparent);
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #bdc3c7;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.menu-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Menu Icon - FIXED SPACING */
+.menu-icon {
+    width: 25px;
+    min-width: 25px;
+    margin-right: 15px; /* Increased from 12px to 15px */
+    font-size: 16px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Specific fix for icons that might be off */
+.menu-link .fa-book,
+.menu-link .fa-store,
+.menu-link .fa-store-alt,
+.menu-link .fa-clipboard-check,
+.menu-link .fa-clipboard-list {
+    margin-right: 15px;
+}
+
+.menu-text {
+    flex: 1;
+    font-size: 14px;
+}
+
+.menu-badge {
+    background: #e74c3c;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* Menu Header / Separator */
+.header {
+    padding: 20px 15px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+}
+
+.header-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.header-text {
+    color: #95a5a6;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   ICON SPECIFIC FIXES
+   ======================================== */
+
+/* Ensure all Font Awesome icons are properly aligned */
+.menu-icon.fa,
+.menu-icon.fas,
+.menu-icon.far,
+.menu-icon.fab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fix for specific problematic icons */
+.fa-dashboard::before,
+.fa-cube::before,
+.fa-cubes::before,
+.fa-book::before,
+.fa-store::before,
+.fa-store-alt::before,
+.fa-shopping-bag::before,
+.fa-plus-circle::before,
+.fa-clipboard-list::before,
+.fa-clipboard-check::before,
+.fa-list-alt::before,
+.fa-history::before,
+.fa-users::before,
+.fa-cogs::before,
+.fa-user-circle::before {
+    width: 16px;
+    text-align: center;
+}

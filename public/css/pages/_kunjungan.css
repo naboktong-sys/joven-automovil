@@ -1,0 +1,575 @@
+/* ============================================================
+   _kunjungan.css
+   Halaman: kunjungan/create & kunjungan/edit
+   Lokasi : public/css/pages/_kunjungan.css
+   Panggil: <link rel="stylesheet" href="{{ asset('css/pages/_kunjungan.css') }}">
+            atau @include di main.css:  @import 'pages/kunjungan';
+   ============================================================ */
+
+/* ── PRODUK CARD ─────────────────────────────────────────── */
+#produk-container .produk-card, #modal-produk-container .produk-card {
+    background: #ffffff !important;
+    border: 1.5px solid #dde6f0 !important;
+    border-radius: 12px !important;
+    padding: 18px 20px !important;
+    margin-bottom: 14px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+    -webkit-transition: box-shadow .2s !important;
+    transition: box-shadow .2s !important;
+}
+#produk-container .produk-card:hover, #modal-produk-container .produk-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,.10) !important;
+}
+
+/* Header kartu */
+#produk-container .produk-card-header, #modal-produk-container .produk-card-header {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid #eef2f7 !important;
+}
+#produk-container .produk-card-title, #modal-produk-container .produk-card-title {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #3498db !important;
+    text-transform: uppercase !important;
+    letter-spacing: .6px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#produk-container .badge-num, #modal-produk-container .badge-num {
+    display: -webkit-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    background: #3498db !important;
+    color: #ffffff !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+}
+
+/* ── TOMBOL HAPUS BARIS ──────────────────────────────────── */
+#produk-container .btn-remove-row, #modal-produk-container .btn-remove-row {
+    display: -webkit-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    background: transparent !important;
+    border: 1px solid #fca5a5 !important;
+    color: #ef4444 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    padding: 5px 12px !important;
+    border-radius: 7px !important;
+    cursor: pointer !important;
+    -webkit-transition: all .15s !important;
+    transition: all .15s !important;
+    line-height: 1.4 !important;
+}
+#produk-container .btn-remove-row:hover, #modal-produk-container .btn-remove-row:hover {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #dc2626 !important;
+}
+
+/* ── SEARCH WRAP ─────────────────────────────────────────── */
+#produk-container .produk-search-wrap, #modal-produk-container .produk-search-wrap {
+    position: relative !important;
+    margin-bottom: 10px !important;
+}
+#produk-container .produk-search-wrap .ico-search,
+#modal-produk-container .produk-search-wrap .ico-search {
+    position: absolute !important;
+    left: 14px !important;
+    top: 50% !important;
+    -webkit-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+    color: #94a3b8 !important;
+    font-size: 15px !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+}
+
+/* ── SEARCH INPUT ────────────────────────────────────────── */
+#produk-container .produk-search-input, #modal-produk-container .produk-search-input {
+    display: block !important;
+    width: 100% !important;
+    height: 48px !important;
+    padding: 0 46px 0 44px !important;
+    border: 2px solid #dde6f0 !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #334155 !important;
+    background-color: #f8fafc !important;
+    background-image: none !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-transition: border-color .15s, background .15s, box-shadow .15s !important;
+    transition: border-color .15s, background .15s, box-shadow .15s !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+#produk-container .produk-search-input::-webkit-input-placeholder, #modal-produk-container .produk-search-input::-webkit-input-placeholder { color: #94a3b8 !important; }
+#produk-container .produk-search-input::-moz-placeholder, #modal-produk-container .produk-search-input::-moz-placeholder           { color: #94a3b8 !important; }
+#produk-container .produk-search-input:-ms-input-placeholder, #modal-produk-container .produk-search-input:-ms-input-placeholder       { color: #94a3b8 !important; }
+#produk-container .produk-search-input:focus, #modal-produk-container .produk-search-input:focus {
+    border-color: #3498db !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(52,152,219,.14) !important;
+    outline: none !important;
+}
+#produk-container .produk-search-input.selected, #modal-produk-container .produk-search-input.selected {
+    border-color: #22c55e !important;
+    background-color: #f0fdf4 !important;
+    box-shadow: 0 0 0 4px rgba(34,197,94,.10) !important;
+}
+
+/* ── TOMBOL CLEAR (×) ────────────────────────────────────── */
+#produk-container .btn-clear-input, #modal-produk-container .btn-clear-input {
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    -webkit-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+    background: #e2e8f0 !important;
+    border: none !important;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    color: #64748b !important;
+    font-size: 15px !important;
+    line-height: 24px !important;
+    text-align: center !important;
+    padding: 0 !important;
+    -webkit-transition: background .1s !important;
+    transition: background .1s !important;
+    z-index: 2 !important;
+}
+#produk-container .btn-clear-input:hover, #modal-produk-container .btn-clear-input:hover {
+    background: #f87171 !important;
+    color: #ffffff !important;
+}
+
+/* ── SEARCH RESULT PANEL ─────────────────────────────────── */
+#produk-container .search-panel, #modal-produk-container .search-panel {
+    display: none !important;
+    border: 1.5px solid #dde6f0 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    margin-bottom: 12px !important;
+}
+#produk-container .search-panel.open, #modal-produk-container .search-panel.open {
+    display: block !important;
+}
+#produk-container .sp-topbar, #modal-produk-container .sp-topbar {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    padding: 8px 14px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e8eef4 !important;
+}
+#produk-container .sp-topbar-label, #modal-produk-container .sp-topbar-label {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: .5px !important;
+}
+#produk-container .sp-topbar-count, #modal-produk-container .sp-topbar-count {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    background: #e2e8f0 !important;
+    padding: 2px 9px !important;
+    border-radius: 20px !important;
+}
+#produk-container .sp-list, #modal-produk-container .sp-list {
+    max-height: 240px !important;
+    overflow-y: auto !important;
+}
+#produk-container .sp-list::-webkit-scrollbar, #modal-produk-container .sp-list::-webkit-scrollbar       { width: 4px; }
+#produk-container .sp-list::-webkit-scrollbar-thumb, #modal-produk-container .sp-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+/* Item baris produk */
+#produk-container .sp-item, #modal-produk-container .sp-item {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    padding: 12px 16px !important;
+    cursor: pointer !important;
+    border: none !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    gap: 12px !important;
+    background: #ffffff !important;
+    -webkit-transition: background .1s !important;
+    transition: background .1s !important;
+    position: relative !important;
+    text-decoration: none !important;
+}
+#produk-container .sp-item:last-child, #modal-produk-container .sp-item:last-child { border-bottom: none !important; }
+#produk-container .sp-item:hover, #modal-produk-container .sp-item:hover      { background: #eff6ff !important; }
+#produk-container .sp-item.active, #modal-produk-container .sp-item.active     { background: #dbeafe !important; }
+#produk-container .sp-item.active::before, #modal-produk-container .sp-item.active::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    width: 3px !important;
+    background: #3498db !important;
+    border-radius: 0 2px 2px 0 !important;
+}
+#produk-container .sp-item-icon, #modal-produk-container .sp-item-icon {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 auto !important;
+    flex: 0 0 auto !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 8px !important;
+    background: #eff6ff !important;
+    border: 1px solid #bfdbfe !important;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    font-size: 17px !important;
+    color: #3b82f6 !important;
+}
+#produk-container .sp-item-body, #modal-produk-container .sp-item-body {
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+#produk-container .sp-item-name, #modal-produk-container .sp-item-name {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#produk-container .sp-item-name mark,
+#modal-produk-container .sp-item-name mark {
+    background: #fef08a !important;
+    color: #1e293b !important;
+    border-radius: 2px !important;
+    padding: 0 2px !important;
+    font-weight: inherit !important;
+}
+#produk-container .sp-item-price, #modal-produk-container .sp-item-price {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #dc2626 !important;
+    margin-top: 3px !important;
+    display: block !important;
+}
+#produk-container .sp-item-right, #modal-produk-container .sp-item-right {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 auto !important;
+    flex: 0 0 auto !important;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: column !important;
+    flex-direction: column !important;
+    -webkit-box-align: end !important;
+    -ms-flex-align: end !important;
+    align-items: flex-end !important;
+}
+#produk-container .badge-stok, #modal-produk-container .badge-stok {
+    display: -webkit-inline-box !important;
+    display: -ms-inline-flexbox !important;
+    display: inline-flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 3px 10px !important;
+    border-radius: 20px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+}
+#produk-container .badge-stok.ok, #modal-produk-container .badge-stok.ok {
+    background: #dcfce7 !important;
+    color: #16a34a !important;
+    border: 1px solid #bbf7d0 !important;
+}
+#produk-container .badge-stok.low, #modal-produk-container .badge-stok.low {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+    border: 1px solid #fecaca !important;
+}
+#produk-container .sp-item-arrow, #modal-produk-container .sp-item-arrow {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 auto !important;
+    flex: 0 0 auto !important;
+    color: #cbd5e1 !important;
+    font-size: 11px !important;
+}
+
+/* Empty state */
+#produk-container .sp-empty, #modal-produk-container .sp-empty          { padding: 32px 20px !important; text-align: center !important; }
+#produk-container .sp-empty-icon, #modal-produk-container .sp-empty-icon     { font-size: 34px !important; color: #e2e8f0 !important; margin-bottom: 10px !important; display: block !important; }
+#produk-container .sp-empty-text, #modal-produk-container .sp-empty-text     { font-size: 14px !important; color: #94a3b8 !important; font-weight: 600 !important; display: block !important; }
+#produk-container .sp-empty-sub, #modal-produk-container .sp-empty-sub      { font-size: 12px !important; color: #cbd5e1 !important; margin-top: 4px !important; display: block !important; }
+
+/* ── SELECTED BOX (produk terpilih) ──────────────────────── */
+#produk-container .selected-produk-box, #modal-produk-container .selected-produk-box {
+    display: none !important;
+    border: 2px solid #22c55e !important;
+    border-radius: 10px !important;
+    background: #f0fdf4 !important;
+    padding: 12px 16px !important;
+    margin-bottom: 12px !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+#produk-container .selected-produk-box.show, #modal-produk-container .selected-produk-box.show {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+#produk-container .sel-icon, #modal-produk-container .sel-icon {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 auto !important;
+    flex: 0 0 auto !important;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 8px !important;
+    background: #22c55e !important;
+    color: #ffffff !important;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+    font-size: 17px !important;
+}
+#produk-container .sel-body, #modal-produk-container .sel-body {
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+#produk-container .sel-name, #modal-produk-container .sel-name {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #15803d !important;
+    display: block !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+#produk-container .sel-meta, #modal-produk-container .sel-meta {
+    font-size: 12px !important;
+    color: #4ade80 !important;
+    margin-top: 3px !important;
+    display: block !important;
+}
+#produk-container .btn-ganti, #modal-produk-container .btn-ganti {
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 auto !important;
+    flex: 0 0 auto !important;
+    background: transparent !important;
+    border: 1.5px solid #22c55e !important;
+    color: #16a34a !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    padding: 5px 14px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    -webkit-transition: all .15s !important;
+    transition: all .15s !important;
+    line-height: 1.4 !important;
+}
+#produk-container .btn-ganti:hover, #modal-produk-container .btn-ganti:hover {
+    background: #22c55e !important;
+    color: #ffffff !important;
+}
+
+/* ── QTY ROW ─────────────────────────────────────────────── */
+#produk-container .qty-row, #modal-produk-container .qty-row {
+    display: none !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 12px 16px !important;
+    background: #f8fafc !important;
+    border: 1.5px solid #dde6f0 !important;
+    border-radius: 10px !important;
+}
+#produk-container .qty-row.show, #modal-produk-container .qty-row.show {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+#produk-container .qty-row > label,
+#modal-produk-container .qty-row > label {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #475569 !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+    display: inline !important;
+}
+#produk-container .qty-stepper, #modal-produk-container .qty-stepper {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    border: 2px solid #dde6f0 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+}
+#produk-container .qty-stepper button,
+#modal-produk-container .qty-stepper button {
+    width: 38px !important;
+    height: 38px !important;
+    border: none !important;
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    line-height: 38px !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -webkit-transition: background .1s !important;
+    transition: background .1s !important;
+    border-radius: 0 !important;
+    display: block !important;
+    float: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+#produk-container .qty-stepper button:hover,
+#modal-produk-container .qty-stepper button:hover {
+    background: #e2e8f0 !important;
+    color: #1e293b !important;
+}
+#produk-container .qty-stepper input[type="number"],
+#modal-produk-container .qty-stepper input[type="number"] {
+    width: 64px !important;
+    height: 38px !important;
+    border: none !important;
+    border-left: 1.5px solid #dde6f0 !important;
+    border-right: 1.5px solid #dde6f0 !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    outline: none !important;
+    -moz-appearance: textfield !important;
+    -webkit-appearance: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    display: block !important;
+    float: none !important;
+}
+#produk-container .qty-stepper input[type="number"]::-webkit-outer-spin-button,
+#produk-container .qty-stepper input[type="number"]::-webkit-inner-spin-button,
+#modal-produk-container .qty-stepper input[type="number"]::-webkit-outer-spin-button,
+#modal-produk-container .qty-stepper input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+#produk-container .qty-stok-info, #modal-produk-container .qty-stok-info {
+    font-size: 12px !important;
+    color: #94a3b8 !important;
+}
+
+/* ── TOMBOL TAMBAH PRODUK ────────────────────────────────── */
+.btn-add-row {
+    display: block !important;
+    width: 100% !important;
+    border: 2px dashed #cbd5e1 !important;
+    color: #64748b !important;
+    background: transparent !important;
+    border-radius: 10px !important;
+    padding: 12px 18px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    -webkit-transition: all .15s !important;
+    transition: all .15s !important;
+    margin-top: 4px !important;
+    text-align: center !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.btn-add-row:hover {
+    border-color: #3498db !important;
+    border-style: solid !important;
+    color: #3498db !important;
+    background: #eff6ff !important;
+}
