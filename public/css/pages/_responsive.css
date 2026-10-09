@@ -1,0 +1,234 @@
+/* =========================================================================
+   RESPONSIVE POLISH - tablet & HP (termasuk Android WebView)
+   Dimuat paling akhir dari main.css.
+   ========================================================================= */
+
+/* ---------- Umum ---------- */
+img, video, canvas, svg {
+    max-width: 100%;
+}
+
+/* Tabel DataTables selalu bisa digeser horizontal, tidak melebarkan halaman */
+.dataTables_wrapper {
+    width: 100%;
+}
+
+.dataTables_wrapper .row > [class*="col-"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper,
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* SweetAlert harus di atas drawer & modal */
+.swal2-container {
+    z-index: 2000 !important;
+}
+
+/* Modal: isi bisa di-scroll saat layar pendek */
+.modal-dialog {
+    max-width: 100%;
+}
+
+.modal-body {
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Tablet & HP (<= 991px) ---------- */
+@media (max-width: 991px) {
+    .content-header {
+        padding: 12px 16px;
+    }
+
+    .content-wrapper > .content,
+    .content-wrapper .content {
+        padding: 16px !important;
+    }
+
+    /* Area sentuh yang nyaman */
+    .btn {
+        min-height: 40px;
+    }
+
+    .btn-xs {
+        min-height: 34px;
+        padding: 7px 12px !important;
+    }
+
+    .form-control {
+        height: 42px;
+        font-size: 16px; /* mencegah auto-zoom pada input */
+    }
+
+    textarea.form-control {
+        height: auto;
+    }
+
+    select.form-control {
+        padding-right: 28px;
+    }
+
+    input[type="file"].form-control {
+        height: auto;
+        padding: 8px 12px;
+    }
+
+    /* Grup tombol aksi di tabel boleh turun baris */
+    .btn-group {
+        flex-wrap: wrap;
+    }
+
+    /* Header kotak: judul + tombol bisa turun baris */
+    .box-header,
+    .modern-box .box-header {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .box-header-right {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .box-body,
+    .modern-box .box-body {
+        padding: 16px;
+    }
+
+    /* Kolom filter bertumpuk dengan jarak */
+    .row > [class*="col-md-"],
+    .row > [class*="col-sm-"] {
+        margin-bottom: 8px;
+    }
+
+    .info-box {
+        margin-bottom: 12px;
+    }
+}
+
+/* ---------- HP (<= 767px) ---------- */
+@media (max-width: 767px) {
+    .content-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .box-title {
+        font-size: 17px !important;
+    }
+
+    .box-header-right {
+        width: 100%;
+    }
+
+    .box-header-right .btn,
+    .box-header-right .btn-action {
+        flex: 1 1 calc(50% - 8px);
+        justify-content: center;
+    }
+
+    /* Kontrol DataTables: tumpuk penuh */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter {
+        float: none !important;
+        width: 100%;
+        text-align: left !important;
+        margin-bottom: 12px;
+    }
+
+    .dataTables_wrapper .dataTables_filter label {
+        display: block;
+        width: 100%;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100% !important;
+        margin-left: 0 !important;
+        display: block;
+    }
+
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        float: none !important;
+        text-align: center !important;
+        padding-top: 10px;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .pagination {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .table-modern thead th,
+    .table-modern tbody td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    /* Modal hampir selebar layar */
+    .modal-dialog {
+        margin: 8px;
+        width: auto;
+    }
+
+    .modal-body {
+        padding: 14px;
+        max-height: calc(100vh - 150px);
+    }
+
+    .modal-footer .btn {
+        min-width: 44%;
+    }
+
+    /* Form horizontal bootstrap 3: label di atas input */
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+
+    /* Kartu produk di form kunjungan */
+    #produk-container .qty-row,
+    #modal-produk-container .qty-row {
+        flex-wrap: wrap !important;
+    }
+
+    #produk-container .produk-card,
+    #modal-produk-container .produk-card {
+        padding: 14px !important;
+    }
+
+    /* Footer ringkas */
+    .main-footer {
+        padding: 10px 16px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+    }
+}
+
+/* ---------- HP kecil (<= 480px) ---------- */
+@media (max-width: 480px) {
+    .content-wrapper > .content,
+    .content-wrapper .content {
+        padding: 12px !important;
+    }
+
+    .box-header-right .btn,
+    .box-header-right .btn-action {
+        flex: 1 1 100%;
+    }
+
+    .main-header .navbar-custom-menu .user-name {
+        display: none;
+    }
+}

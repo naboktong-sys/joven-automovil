@@ -20,15 +20,6 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     
-    <!-- Critical CSS - Force Sidebar Left -->
-    <style>
-        .main-sidebar { position: fixed !important; top: 0 !important; left: 0 !important; width: 250px !important; height: 100vh !important; }
-        .main-header { position: fixed !important; top: 0 !important; left: 250px !important; right: 0 !important; }
-        .content-wrapper { margin-left: 250px !important; margin-top: 50px !important; }
-        .main-header .logo { position: fixed !important; top: 0 !important; left: 0 !important; width: 250px !important; height: 50px !important; }
-        .sidebar { padding-top: 50px !important; }
-    </style>
-
     @stack('css')
 </head>
 <body class="hold-transition sidebar-mini skin-blue">
@@ -54,6 +45,9 @@
 
         @includeIf('layouts.footer')
     </div>
+
+    <!-- Overlay drawer sidebar (tablet / HP) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
     <!-- jQuery 3 -->
     <script src="{{ asset('AdminLTE-2/bower_components/jquery/dist/jquery.min.js') }}"></script>
@@ -111,18 +105,59 @@
     @stack('scripts')
     
     <script>
-    // Force sidebar to left on page load
-    $(document).ready(function() {
-        // Remove any conflicting inline styles
-        $('.main-sidebar').removeAttr('style');
-        $('.main-header').removeAttr('style');
-        $('.content-wrapper').removeAttr('style');
-        
-        // Ensure sidebar is visible
-        $('body').removeClass('sidebar-collapse');
-        
-        console.log('✅ Sidebar positioned to left');
-    });
+    // Sidebar responsif: desktop = collapse (mini), tablet/HP = drawer
+    (function () {
+        var BREAKPOINT = 992;
+        var $body = $('body');
+
+        function isDrawerMode() {
+            return window.innerWidth < BREAKPOINT;
+        }
+
+        function closeDrawer() {
+            $body.removeClass('sidebar-open');
+        }
+
+        function syncMode() {
+            if (isDrawerMode()) {
+                $body.removeClass('sidebar-collapse');
+            } else {
+                closeDrawer();
+            }
+        }
+
+        $(document).ready(function () {
+            // Bersihkan style inline dari AdminLTE agar tidak menimpa CSS responsif
+            $('.main-sidebar, .main-header').removeAttr('style');
+            $('.content-wrapper').css('min-height', '');
+
+            syncMode();
+
+            $('#sidebar-toggle').on('click', function (e) {
+                e.preventDefault();
+                if (isDrawerMode()) {
+                    $body.toggleClass('sidebar-open');
+                } else {
+                    $body.toggleClass('sidebar-collapse');
+                }
+            });
+
+            // Tutup drawer: klik overlay, pilih menu, atau tombol Esc
+            $('#sidebar-overlay').on('click', closeDrawer);
+            $('.main-sidebar .menu-link').on('click', function () {
+                if (isDrawerMode()) { closeDrawer(); }
+            });
+            $(document).on('keydown', function (e) {
+                if (e.key === 'Escape') { closeDrawer(); }
+            });
+
+            var resizeTimer;
+            $(window).on('resize orientationchange', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(syncMode, 100);
+            });
+        });
+    })();
     </script>
 </body>
 </html>

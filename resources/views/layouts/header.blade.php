@@ -16,10 +16,13 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <a href="#" class="sidebar-toggle" id="sidebar-toggle" role="button">
             <span class="sr-only">Toggle navigation</span>
             <i class="toggle-icon"></i>
         </a>
+
+        <!-- Nama perusahaan (tablet / HP) -->
+        <span class="navbar-title-mobile">{{ $setting->nama_perusahaan }}</span>
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">

@@ -1,5 +1,7 @@
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
+    <!-- Brand (hanya tampil di drawer tablet / HP) -->
+    <div class="sidebar-brand">{{ $setting->nama_perusahaan }}</div>
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->

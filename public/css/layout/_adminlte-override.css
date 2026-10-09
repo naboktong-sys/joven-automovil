@@ -1,98 +1,9 @@
 /* ========================================
-   ADMINLTE OVERRIDES
-   Override default AdminLTE styles
+   ADMINLTE OVERRIDES (warna & skin saja)
+   Posisi/ukuran sidebar, header, content ada di layout/_critical.css
    ======================================== */
 
-/* Reset AdminLTE default sidebar positioning */
-.skin-blue .main-sidebar,
-.main-sidebar {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    bottom: 0 !important;
-    width: 250px !important;
-}
-
-/* Reset AdminLTE header positioning */
-.skin-blue .main-header,
-.main-header {
-    position: fixed !important;
-    top: 0 !important;
-    left: 250px !important;
-    right: 0 !important;
-}
-
-/* Reset AdminLTE content wrapper */
-.content-wrapper {
-    margin-left: 250px !important;
-    margin-top: 0 !important;
-    padding-top: 70px !important;
-}
-
-/* Reset AdminLTE footer */
-.main-footer {
-    margin-left: 250px !important;
-}
-
-/* Sidebar Collapse State */
-.sidebar-collapse .main-sidebar {
-    width: 60px !important;
-}
-
-.sidebar-collapse .main-header,
-.sidebar-collapse .content-wrapper,
-.sidebar-collapse .main-footer {
-    margin-left: 60px !important;
-    left: 60px !important;
-}
-
-/* Mobile Override */
-@media (max-width: 767px) {
-    .main-sidebar {
-        left: -250px !important;
-        transition: left 0.3s ease-in-out !important;
-    }
-    
-    .sidebar-open .main-sidebar {
-        left: 0 !important;
-    }
-    
-    .main-header,
-    .content-wrapper,
-    .main-footer {
-        left: 0 !important;
-        margin-left: 0 !important;
-    }
-}
-
-/* Fix AdminLTE Logo */
-.main-header .logo {
-    position: absolute !important;
-    left: -250px !important;
-    width: 250px !important;
-    top: 0 !important;
-    height: 50px !important;
-}
-
-.sidebar-collapse .main-header .logo {
-    left: -60px !important;
-    width: 60px !important;
-}
-
-@media (max-width: 767px) {
-    .main-header .logo {
-        position: relative !important;
-        left: 0 !important;
-        width: 230px !important;
-    }
-}
-
-/* Fix Navbar */
-.main-header .navbar {
-    margin-left: 0 !important;
-}
-
-/* Override AdminLTE skin colors */
+/* Navbar */
 .skin-blue .main-header .navbar {
     background-color: var(--white) !important;
 }
@@ -101,6 +12,7 @@
     color: var(--navy-dark) !important;
 }
 
+/* Logo (area nama perusahaan di atas sidebar, desktop) */
 .skin-blue .main-header .logo {
     background-color: var(--navy-dark) !important;
     color: var(--white) !important;
@@ -111,7 +23,7 @@
     background-color: var(--navy-medium) !important;
 }
 
-/* Sidebar Menu Override */
+/* Sidebar Menu */
 .skin-blue .sidebar-menu > li.header,
 .sidebar-menu > li.header {
     background: transparent !important;
@@ -128,7 +40,7 @@
     border-left-color: var(--accent-blue) !important;
 }
 
-/* User Panel Fix */
+/* User Panel */
 .skin-blue .user-panel {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
@@ -142,28 +54,14 @@
     padding-left: 40px !important;
 }
 
-/* Fix z-index issues */
-.main-sidebar {
-    z-index: 1000 !important;
-}
-
-.main-header {
-    z-index: 1001 !important;
-}
-
-.main-footer {
-    z-index: 999 !important;
-}
-
-/* Content adjustment */
+/* Latar konten */
 .content-wrapper {
     background-color: #f4f6f9 !important;
-    min-height: calc(100vh - 130px) !important;
 }
 
-/* Box shadows */
+/* Bayangan */
 .main-sidebar {
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .main-header {

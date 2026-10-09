@@ -68,19 +68,19 @@ body.login-page {
 }
 
 /* Fix for browser zoom levels */
-@media (min-resolution: 120dpi) and (max-resolution: 144dpi) {
+@media (min-resolution: 120dpi) and (max-resolution: 144dpi) and (hover: hover) and (pointer: fine) {
     .login-box {
         transform: scale(0.95);
     }
 }
 
-@media (min-resolution: 145dpi) and (max-resolution: 192dpi) {
+@media (min-resolution: 145dpi) and (max-resolution: 192dpi) and (hover: hover) and (pointer: fine) {
     .login-box {
         transform: scale(0.9);
     }
 }
 
-@media (min-resolution: 193dpi) {
+@media (min-resolution: 193dpi) and (hover: hover) and (pointer: fine) {
     .login-box {
         transform: scale(0.85);
     }

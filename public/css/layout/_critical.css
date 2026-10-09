@@ -1,71 +1,279 @@
 /* =========================================================================
-   CRITICAL LAYOUT - HIGHEST PRIORITY
-   File ini harus dimuat paling akhir untuk override semua CSS
+   LAYOUT SHELL - SATU-SATUNYA SUMBER POSISI SIDEBAR / HEADER / CONTENT
+   -------------------------------------------------------------------------
+   Desktop  (>= 992px) : sidebar tetap di kiri 250px, bisa di-collapse ke 60px
+   Tablet / HP (<= 991px): sidebar menjadi drawer (geser dari kiri) dengan
+                           overlay; konten & header selalu selebar layar.
+   Aturan posisi di file CSS lain (_layout-fix, _adminlte-override) sudah
+   dihapus agar tidak saling menimpa.
    ========================================================================= */
 
-/* FORCE SIDEBAR TO LEFT - CRITICAL */
-body .main-sidebar,
-body.skin-blue .main-sidebar,
-body.hold-transition .main-sidebar,
-.wrapper .main-sidebar {
+:root {
+    --header-h: 56px;
+    --sidebar-w: 250px;
+    --sidebar-mini-w: 60px;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body.skin-blue {
+    background: #f4f6f9;
+}
+
+/* Nonaktifkan overlay lama (::before) - diganti .sidebar-overlay */
+body.sidebar-open::before {
+    display: none !important;
+}
+
+/* ---------- Bagian yang berlaku di semua ukuran ---------- */
+
+.main-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    z-index: 1100 !important;
+    overflow: hidden !important;
+}
+
+.main-sidebar .sidebar {
+    margin-top: var(--header-h) !important;
+    height: calc(100% - var(--header-h)) !important;
+    padding-top: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.main-header {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: var(--header-h) !important;
+    margin: 0 !important;
+    z-index: 1050 !important;
+}
+
+.main-header .navbar {
+    height: var(--header-h) !important;
+    min-height: var(--header-h) !important;
+    margin: 0 !important;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.main-header .logo {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    bottom: 0 !important;
-    width: 250px !important;
-    height: 100vh !important;
-    transform: none !important;
-    display: block !important;
+    height: var(--header-h) !important;
+    z-index: 1110 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-/* FORCE HEADER POSITION */
-body .main-header,
-body.skin-blue .main-header,
-.wrapper .main-header {
-    position: fixed !important;
-    top: 0 !important;
-    left: 250px !important;
-    right: 0 !important;
-    margin-left: 0 !important;
-    width: auto !important;
-}
-
-/* FORCE CONTENT POSITION */
-body .content-wrapper,
-.wrapper .content-wrapper {
-    margin-left: 250px !important;
-    margin-top: 50px !important;
+.content-wrapper {
+    margin-top: var(--header-h) !important;
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: calc(100vh - var(--header-h)) !important;
+    z-index: 1 !important;
 }
 
-/* FORCE FOOTER POSITION */
-body .main-footer,
-.wrapper .main-footer {
-    margin-left: 250px !important;
+.main-footer {
     position: relative !important;
     left: auto !important;
+    bottom: auto !important;
 }
 
-/* LOGO IN SIDEBAR */
-body .main-header .logo,
-.wrapper .main-header .logo {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 250px !important;
-    height: 50px !important;
+/* Brand di dalam drawer (hanya tampil pada tablet/HP) */
+.sidebar-brand {
+    display: none;
 }
 
-/* NAVBAR ADJUSTMENT */
-body .main-header .navbar,
-.wrapper .main-header .navbar {
-    margin-left: 0 !important;
+/* Judul di header (hanya tampil pada tablet/HP) */
+.navbar-title-mobile {
+    display: none;
 }
 
-/* SIDEBAR CONTENT SCROLLABLE */
-body .main-sidebar .sidebar,
-.wrapper .main-sidebar .sidebar {
-    padding-top: 50px !important;
-    height: calc(100vh - 50px) !important;
-    overflow-y: auto !important;
+/* Overlay drawer */
+.sidebar-overlay {
+    display: none;
+}
+
+/* ---------- DESKTOP >= 992px ---------- */
+@media (min-width: 992px) {
+    .main-sidebar {
+        width: var(--sidebar-w) !important;
+        transform: none !important;
+    }
+
+    .main-header {
+        left: var(--sidebar-w) !important;
+    }
+
+    .main-header .logo {
+        width: var(--sidebar-w) !important;
+    }
+
+    .content-wrapper,
+    .main-footer {
+        margin-left: var(--sidebar-w) !important;
+    }
+
+    /* Collapse (mini) */
+    body.sidebar-collapse .main-sidebar {
+        width: var(--sidebar-mini-w) !important;
+    }
+
+    body.sidebar-collapse .main-header {
+        left: var(--sidebar-mini-w) !important;
+    }
+
+    body.sidebar-collapse .main-header .logo {
+        width: var(--sidebar-mini-w) !important;
+    }
+
+    body.sidebar-collapse .main-header .logo .logo-lg {
+        display: none;
+    }
+
+    body.sidebar-collapse .content-wrapper,
+    body.sidebar-collapse .main-footer {
+        margin-left: var(--sidebar-mini-w) !important;
+    }
+}
+
+/* ---------- TABLET & HP <= 991px : sidebar = drawer ---------- */
+@media (max-width: 991px) {
+    .main-sidebar {
+        width: 280px !important;
+        max-width: 85vw !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.25s ease !important;
+        box-shadow: none !important;
+    }
+
+    body.sidebar-open .main-sidebar {
+        transform: translateX(0) !important;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--header-h);
+        padding: 0 16px;
+        background: var(--navy-dark);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        z-index: 2;
+    }
+
+    .main-header {
+        left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Logo fixed milik desktop disembunyikan; nama tampil di navbar */
+    .main-header .logo {
+        display: none !important;
+    }
+
+    .main-header .navbar {
+        padding: 0 8px !important;
+    }
+
+    .main-header .sidebar-toggle {
+        margin-right: 4px !important;
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-title-mobile {
+        display: block;
+        flex: 1 1 auto;
+        min-width: 0;
+        margin: 0 8px;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--navy-dark);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .content-wrapper,
+    .main-footer {
+        margin-left: 0 !important;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1090;
+        opacity: 0;
+        pointer-events: none;
+        display: block;
+        transition: opacity 0.25s ease;
+    }
+
+    body.sidebar-open .sidebar-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body.sidebar-open {
+        overflow: hidden;
+    }
+
+    /* Dropdown user tidak boleh keluar layar */
+    .main-header .navbar-custom-menu .dropdown-menu {
+        min-width: 240px;
+        max-width: calc(100vw - 16px);
+        right: 0;
+        left: auto;
+    }
+}
+
+/* ---------- Dropdown / modal selalu di atas ---------- */
+.dropdown-menu { z-index: 1200 !important; }
+.modal-backdrop { z-index: 1300 !important; }
+.modal { z-index: 1310 !important; }
+
+@media print {
+    .main-sidebar,
+    .main-header,
+    .main-footer,
+    .sidebar-overlay {
+        display: none !important;
+    }
+
+    .content-wrapper {
+        margin: 0 !important;
+    }
 }
