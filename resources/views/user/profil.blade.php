@@ -36,7 +36,7 @@
             <div class="box-body text-center" style="padding: 40px 30px;">
                 <div class="profile-avatar-wrapper">
                     <div class="profile-avatar tampil-foto">
-                        <img src="{{ url($profil->foto ?? '/img/user.jpg') }}" alt="Profile Photo" class="profile-img">
+                        <img src="{{ url($profil->foto ?: '/img/user.svg') }}" alt="Profile Photo" class="profile-img">
                         <div class="profile-avatar-overlay">
                             <i class="fa fa-camera"></i>
                         </div>
@@ -49,7 +49,7 @@
                 <div class="profile-role">
                     <span class="badge-status info">
                         <i class="fa fa-user-tag"></i>
-                        {{ ucfirst($profil->level ?? 'User') }}
+                        {{ $profil->level_label }}
                     </span>
                 </div>
                 

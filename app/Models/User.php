@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,10 +17,16 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    /** Level user */
+    public const LEVEL_ADMIN = 1;
+    public const LEVEL_SALES = 2;
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'foto',
+        'level',
     ];
 
     protected $hidden = [
@@ -37,39 +42,16 @@ class User extends Authenticatable
 
     protected $appends = [
         'profile_photo_url',
+        'level_label',
     ];
 
-    public function scopeIsNotAdmin($query)
+    public function isAdmin(): bool
     {
-        return $query->where('level', '!=', 1);
+        return (int) $this->level === self::LEVEL_ADMIN;
     }
 
-    // Relasi ke outlets
-    public function outlets()
+    public function getLevelLabelAttribute(): string
     {
-        return $this->belongsToMany(Outlet::class, 'outlet_user', 'user_id', 'id_outlet')
-                    ->withTimestamps();
-    }
-
-    // Cek apakah user punya akses ke outlet tertentu
-    public function hasAccessToOutlet($outletId)
-    {
-        // Admin punya akses ke semua outlet
-        if ($this->level == 1) {
-            return true;
-        }
-
-        // Kasir cek berdasarkan relasi - PERBAIKAN: tambah table prefix
-        return $this->outlets()->where('outlets.id_outlet', $outletId)->exists();
-    }
-
-    // Get outlet yang bisa diakses user
-    public function getAccessibleOutlets()
-    {
-        if ($this->level == 1) {
-            return Outlet::where('status', 1)->get();
-        }
-
-        return $this->outlets()->where('outlets.status', 1)->get();
+        return $this->isAdmin() ? 'Admin' : 'Sales';
     }
 }

@@ -111,6 +111,6 @@ class Toko extends Model
      */
     public function getFotoUrlAttribute()
     {
-        return get_foto_url('toko', $this->foto_toko, 'default-store.png');
+        return get_foto_url('toko', $this->foto_toko, 'default-store.svg');
     }
 }

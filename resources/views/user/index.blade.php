@@ -100,12 +100,24 @@
                         table.ajax.reload();
                     })
                     .fail((errors) => {
-                        alert('Tidak dapat menyimpan data');
+                        alert(errorMessage(errors, 'Tidak dapat menyimpan data'));
                         return;
                     });
             }
         });
     });
+
+    function errorMessage(xhr, fallback) {
+        if (xhr.responseJSON) {
+            if (xhr.responseJSON.errors) {
+                return Object.values(xhr.responseJSON.errors).flat().join('\n');
+            }
+            if (xhr.responseJSON.message) {
+                return xhr.responseJSON.message;
+            }
+        }
+        return fallback;
+    }
 
     function addForm(url) {
         $('#modal-form').modal('show');
@@ -134,6 +146,7 @@
             .done((response) => {
                 $('#modal-form [name=name]').val(response.name);
                 $('#modal-form [name=email]').val(response.email);
+                $('#modal-form [name=level]').val(response.level);
             })
             .fail((errors) => {
                 alert('Tidak dapat menampilkan data');
@@ -163,7 +176,7 @@
                         Swal.fire('Berhasil!', 'User berhasil dihapus', 'success');
                     })
                     .fail((errors) => {
-                        Swal.fire('Gagal!', 'Tidak dapat menghapus user', 'error');
+                        Swal.fire('Gagal!', errorMessage(errors, 'Tidak dapat menghapus user'), 'error');
                         return;
                     });
             }

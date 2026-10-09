@@ -24,7 +24,7 @@
                         </label>
                         <div class="image-upload-wrapper">
                             <div class="image-preview" id="image-preview">
-                                <img id="preview-img" src="{{ asset('img/product-placeholder.png') }}" alt="Preview">
+                                <img id="preview-img" src="{{ asset('img/product-placeholder.svg') }}" alt="Preview">
                             </div>
                             <div class="upload-control">
                                 <input type="file" name="gambar" id="gambar" class="form-control" accept="image/*">

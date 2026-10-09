@@ -180,7 +180,7 @@ class ProdukController extends Controller
                 'merk' => $request->merk,
                 'harga_beli' => $request->harga_beli,
                 'harga_jual' => $request->harga_jual,
-                'diskon' => $request->diskon ?? 0,
+                'diskon' => $request->input('diskon', $produk->diskon ?? 0),
                 'stok' => $request->stok ?? 0,
             ];
 
@@ -256,6 +256,8 @@ class ProdukController extends Controller
      */
     public function deleteSelected(Request $request)
     {
+        $request->validate(['id_produk' => 'required|array']);
+
         try {
             $deleted = 0;
             $failed = 0;
@@ -300,6 +302,8 @@ class ProdukController extends Controller
      */
     public function cetakBarcode(Request $request)
     {
+        $request->validate(['id_produk' => 'required|array']);
+
         $dataproduk = array();
 
         foreach ($request->id_produk as $id) {
@@ -314,18 +318,5 @@ class ProdukController extends Controller
         $pdf->setPaper('a4', 'portrait');
 
         return $pdf->stream('barcode-produk-' . date('YmdHis') . '.pdf');
-    }
-
-    /**
-     * Get produk dengan stok menipis
-     */
-    public function stokMenipis()
-    {
-        $produk = Produk::with('kategori')
-            ->where('stok', '<=', 10)
-            ->orderBy('stok', 'ASC')
-            ->get();
-
-        return view('produk.stok_menipis', compact('produk'));
     }
 }

@@ -1,85 +1,42 @@
-<p align="center">
-    <a href="https://github.com/sandinur157" target="_blank"><img src="https://raw.githubusercontent.com/sandinur157/tuturial-membuat-aplikasi-point-of-sales/main/public/img/logo.png" width="120"></a>
-</p>
+# Buku Kunjungan Sales Onderdil
 
-## Tentang Aplikasi
+Aplikasi web (Laravel 8 + AdminLTE 2) untuk mencatat kunjungan sales ke toko langganan, produk onderdil yang dibeli, serta histori pembelian per toko.
 
-Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola transaksi pada sebuah toko atau oleh kasir. Aplikasi ini dibuat menggunakan Laravel v8.* dan minimal PHP v7.4 jadi apabila pada saat proses instalasi atau penggunaan terdapat error atau bug kemungkinan karena versi dari PHP yang tidak support.
+## Fitur
 
-## Beberapa Fitur yang tersedia:
-- Manajemen Kategori Produk
-- Manajemen Produk
-  - Multiple Delete
-  - Cetak Barcode
-- Manajemen Member atau Anggota
-  - Cetak Kartu Member
-- Manajemen Supplier
-- Transaksi Pengeluaran
-- Transaksi Pembelian
-- Transaksi Penjualan
-- Laporan Pendapatan atau Laba & Rugi
-  - Bulanan
-  - Harian
-  - Custom Tanggal
-- Custom Tipe Nota
-  - Nota Besar
-  - Nota Kecil / Thermal Nota
-- Manajemen User dan Profil
-- Pengaturan Toko
-  - Identitas
-  - Upload Desain Kartu Member
-  - Setting Diskon Member
-- User (Administrator, Kasir)
-- Grafik ChartJS pada Dashboard
+- **Master data:** Kategori, Produk (gambar, barcode, stok), Katalog Produk, Toko Langganan (foto, GPS, kontak)
+- **Kunjungan sales:** catat kunjungan + produk yang dibeli (stok otomatis berkurang, dikembalikan saat kunjungan/item dihapus), edit lewat modal
+- **Histori toko:** riwayat per toko dan seluruh toko, filter toko/tanggal, ekspor Excel & PDF
+- **Pengaturan & user:** profil perusahaan/logo, manajemen user (khusus admin)
 
+## Level user
 
-## Setup Aplikasi
-Jalankan perintah 
-```bash
-composer update
-```
-atau:
+| Level | Peran | Akses |
+|-------|-------|-------|
+| 1 | Admin | Semua fitur, termasuk Manajemen User & Pengaturan |
+| 2 | Sales | Semua fitur kecuali Manajemen User & Pengaturan |
+
+Akun dibuat oleh admin lewat menu **Manajemen User**. Registrasi publik dimatikan.
+
+## Menjalankan lokal
+
 ```bash
 composer install
-```
-Copy file .env dari .env.example
-```bash
 cp .env.example .env
-```
-Konfigurasi file .env
-```bash
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=example_app
-DB_USERNAME=root
-DB_PASSWORD=
-```
-Opsional
-```bash
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=base64:QGRW4K7UVzS2M5HE2ZCLlUuiCtOIzRSfb38iWApkphE=
-APP_DEBUG=true
-APP_URL=http://example-app.test
-```
-Generate key
-```bash
 php artisan key:generate
-```
-Migrate database
-```bash
-php artisan migrate
-```
-Seeder table User, Pengaturan
-```bash
-php artisan db:seed
-```
-Menjalankan aplikasi
-```bash
+# isi DB_* di .env (MySQL), lalu:
+php artisan migrate --seed   # seed membuat admin awal & setting default
+php artisan storage:link
 php artisan serve
 ```
 
-## License
+Seeder membuat `admin@gmail.com` dengan password `123` — **segera ganti** setelah login pertama.
 
-[MIT license](https://opensource.org/licenses/MIT)
+Untuk memakai data yang sudah ada, impor dump SQL ke database MySQL lalu lewati `migrate --seed` (tabel `migrations` sudah terisi di dump).
+
+## Catatan teknis
+
+- Frontend memakai AdminLTE 2 / Bootstrap 3 dari `public/AdminLTE-2`, tidak perlu `npm build`.
+- Upload foto toko, kunjungan, dan produk disimpan di `storage/app/public` (butuh `storage:link`); logo & foto user di `public/img`.
+- Sesi disimpan di database (`SESSION_DRIVER=database`).
+- Autentikasi memakai Fortify (login/logout saja); fitur Jetstream lain dimatikan.

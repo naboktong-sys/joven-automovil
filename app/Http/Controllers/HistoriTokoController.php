@@ -14,7 +14,7 @@ use App\Exports\HistoriTokoExport;
 class HistoriTokoController extends Controller
 {
     /**
-     * Display histori for all toko
+     * Halaman histori seluruh kunjungan (dengan filter toko & tanggal)
      */
     public function index()
     {
@@ -23,36 +23,22 @@ class HistoriTokoController extends Controller
     }
 
     /**
-     * Get all histori data for DataTables
+     * Data histori semua toko untuk DataTables
      */
     public function dataAll(Request $request)
     {
-        $kunjungan = Kunjungan::with('toko')
-            ->orderBy('tanggal_kunjungan', 'DESC');
+        $kunjungan = $this->filteredQuery($request)->with('toko')->get();
 
-        // Filter by toko
-        if ($request->has('toko_id') && $request->toko_id != '') {
-            $kunjungan->where('toko_id', $request->toko_id);
-        }
-
-        // Filter by date range
-        if ($request->has('tanggal_awal') && $request->tanggal_awal != '') {
-            $kunjungan->whereDate('tanggal_kunjungan', '>=', $request->tanggal_awal);
-        }
-        if ($request->has('tanggal_akhir') && $request->tanggal_akhir != '') {
-            $kunjungan->whereDate('tanggal_kunjungan', '<=', $request->tanggal_akhir);
-        }
-
-        return DataTables::of($kunjungan->get())
+        return DataTables::of($kunjungan)
             ->addIndexColumn()
             ->editColumn('tanggal_kunjungan', function ($kunjungan) {
-                return tanggal_indonesia($kunjungan->tanggal_kunjungan, false);
+                return tanggal_indonesia($kunjungan->tanggal_kunjungan->format('Y-m-d'), false);
             })
             ->addColumn('nama_toko', function ($kunjungan) {
-                return $kunjungan->toko->nama_toko ?? '-';
+                return e($kunjungan->toko->nama_toko ?? '-');
             })
             ->addColumn('alamat_toko', function ($kunjungan) {
-                return \Str::limit($kunjungan->toko->alamat ?? '-', 40);
+                return e(\Str::limit($kunjungan->toko->alamat ?? '-', 40));
             })
             ->editColumn('total_qty', function ($kunjungan) {
                 return '<span class="badge badge-primary">'. $kunjungan->total_qty .' item</span>';
@@ -62,9 +48,9 @@ class HistoriTokoController extends Controller
             })
             ->addColumn('aksi', function ($kunjungan) {
                 return '
-                <button type="button" onclick="showDetail(`'. route('kunjungan.show', $kunjungan->id) .'`)" class="btn btn-xs btn-info btn-flat">
+                <a href="'. route('kunjungan.show', $kunjungan->id) .'" class="btn btn-xs btn-info btn-flat">
                     <i class="fa fa-eye"></i> Detail
-                </button>
+                </a>
                 ';
             })
             ->rawColumns(['total_qty', 'total_nilai', 'aksi'])
@@ -72,26 +58,25 @@ class HistoriTokoController extends Controller
     }
 
     /**
-     * Display histori for specific toko
+     * Halaman histori satu toko
      */
     public function show(string $id)
     {
-        $toko = Toko::with(['kunjungan' => function($query) {
+        $toko = Toko::with(['kunjungan' => function ($query) {
             $query->orderBy('tanggal_kunjungan', 'DESC');
         }])->findOrFail($id);
 
-        // Get produk yang sering dibeli
-        $produkSering = Produk::select('produk.*')
-            ->join('kunjungan_details', 'produk.id', '=', 'kunjungan_details.produk_id')
+        // Produk yang paling sering dibeli toko ini
+        $produkSering = Produk::query()
+            ->join('kunjungan_details', 'produk.id_produk', '=', 'kunjungan_details.produk_id')
             ->join('kunjungans', 'kunjungan_details.kunjungan_id', '=', 'kunjungans.id')
             ->where('kunjungans.toko_id', $id)
-            ->selectRaw('SUM(kunjungan_details.qty) as total_qty')
-            ->groupBy('produk.id')
-            ->orderBy('total_qty', 'DESC')
+            ->selectRaw('produk.id_produk, produk.kode_produk, produk.nama_produk, produk.merk, SUM(kunjungan_details.qty) as total_qty, SUM(kunjungan_details.subtotal) as total_nilai')
+            ->groupBy('produk.id_produk', 'produk.kode_produk', 'produk.nama_produk', 'produk.merk')
+            ->orderByDesc('total_qty')
             ->limit(5)
             ->get();
 
-        // Statistics
         $totalKunjungan = $toko->kunjungan->count();
         $totalBelanja = $toko->kunjungan->sum('total_nilai');
         $rataRataBelanja = $totalKunjungan > 0 ? $totalBelanja / $totalKunjungan : 0;
@@ -108,25 +93,18 @@ class HistoriTokoController extends Controller
     }
 
     /**
-     * Get histori data for specific toko (DataTables)
+     * Data histori satu toko untuk DataTables
      */
     public function data(string $id, Request $request)
     {
-        $kunjungan = Kunjungan::where('toko_id', $id)
-            ->orderBy('tanggal_kunjungan', 'DESC');
+        $request->merge(['toko_id' => $id]);
 
-        // Filter by date range
-        if ($request->has('tanggal_awal') && $request->tanggal_awal != '') {
-            $kunjungan->whereDate('tanggal_kunjungan', '>=', $request->tanggal_awal);
-        }
-        if ($request->has('tanggal_akhir') && $request->tanggal_akhir != '') {
-            $kunjungan->whereDate('tanggal_kunjungan', '<=', $request->tanggal_akhir);
-        }
+        $kunjungan = $this->filteredQuery($request)->with('detail.produk')->get();
 
-        return DataTables::of($kunjungan->get())
+        return DataTables::of($kunjungan)
             ->addIndexColumn()
             ->editColumn('tanggal_kunjungan', function ($kunjungan) {
-                return tanggal_indonesia($kunjungan->tanggal_kunjungan, false);
+                return tanggal_indonesia($kunjungan->tanggal_kunjungan->format('Y-m-d'), false);
             })
             ->editColumn('total_qty', function ($kunjungan) {
                 return '<span class="badge badge-primary">'. $kunjungan->total_qty .' item</span>';
@@ -135,9 +113,9 @@ class HistoriTokoController extends Controller
                 return '<strong class="text-success">Rp. '. format_uang($kunjungan->total_nilai) .'</strong>';
             })
             ->addColumn('detail_produk', function ($kunjungan) {
-                $html = '<ul class="list-unstyled mb-0">';
+                $html = '<ul class="list-unstyled" style="margin:0">';
                 foreach ($kunjungan->detail->take(3) as $detail) {
-                    $html .= '<li><small>• '. $detail->produk->nama_produk .' ('. $detail->qty .'x)</small></li>';
+                    $html .= '<li><small>• '. e($detail->produk->nama_produk ?? '(produk dihapus)') .' ('. $detail->qty .'x)</small></li>';
                 }
                 if ($kunjungan->detail->count() > 3) {
                     $html .= '<li><small class="text-muted">... dan '. ($kunjungan->detail->count() - 3) .' lainnya</small></li>';
@@ -147,9 +125,9 @@ class HistoriTokoController extends Controller
             })
             ->addColumn('aksi', function ($kunjungan) {
                 return '
-                <button type="button" onclick="showDetail(`'. route('kunjungan.show', $kunjungan->id) .'`)" class="btn btn-xs btn-info btn-flat">
+                <a href="'. route('kunjungan.show', $kunjungan->id) .'" class="btn btn-xs btn-info btn-flat">
                     <i class="fa fa-eye"></i> Detail
-                </button>
+                </a>
                 ';
             })
             ->rawColumns(['total_qty', 'total_nilai', 'detail_produk', 'aksi'])
@@ -157,68 +135,28 @@ class HistoriTokoController extends Controller
     }
 
     /**
-     * Filter histori
-     */
-    public function filter(Request $request)
-    {
-        // Logic for filtering - can be expanded based on needs
-        return redirect()->route('histori.index')->with($request->all());
-    }
-
-    /**
-     * Export histori to Excel
+     * Export histori ke Excel
      */
     public function exportExcel(Request $request)
     {
-        $toko_id = $request->get('toko_id');
-        $tanggal_awal = $request->get('tanggal_awal');
-        $tanggal_akhir = $request->get('tanggal_akhir');
+        $kunjungan = $this->filteredQuery($request)->with(['toko', 'detail.produk'])->get();
 
-        $kunjungan = Kunjungan::with(['toko', 'detail.produk'])
-            ->when($toko_id, function($query) use ($toko_id) {
-                return $query->where('toko_id', $toko_id);
-            })
-            ->when($tanggal_awal, function($query) use ($tanggal_awal) {
-                return $query->whereDate('tanggal_kunjungan', '>=', $tanggal_awal);
-            })
-            ->when($tanggal_akhir, function($query) use ($tanggal_akhir) {
-                return $query->whereDate('tanggal_kunjungan', '<=', $tanggal_akhir);
-            })
-            ->orderBy('tanggal_kunjungan', 'DESC')
-            ->get();
-
-        $filename = 'histori-kunjungan-' . date('YmdHis') . '.xlsx';
-
-        return Excel::download(new HistoriTokoExport($kunjungan), $filename);
+        return Excel::download(
+            new HistoriTokoExport($kunjungan),
+            'histori-kunjungan-' . date('YmdHis') . '.xlsx'
+        );
     }
 
     /**
-     * Export histori to PDF
+     * Export histori ke PDF
      */
     public function exportPdf(Request $request)
     {
-        $toko_id = $request->get('toko_id');
+        $kunjungan = $this->filteredQuery($request)->with(['toko', 'detail.produk'])->get();
+
+        $toko = $request->filled('toko_id') ? Toko::find($request->toko_id) : null;
         $tanggal_awal = $request->get('tanggal_awal');
         $tanggal_akhir = $request->get('tanggal_akhir');
-
-        $kunjungan = Kunjungan::with(['toko', 'detail.produk'])
-            ->when($toko_id, function($query) use ($toko_id) {
-                return $query->where('toko_id', $toko_id);
-            })
-            ->when($tanggal_awal, function($query) use ($tanggal_awal) {
-                return $query->whereDate('tanggal_kunjungan', '>=', $tanggal_awal);
-            })
-            ->when($tanggal_akhir, function($query) use ($tanggal_akhir) {
-                return $query->whereDate('tanggal_kunjungan', '<=', $tanggal_akhir);
-            })
-            ->orderBy('tanggal_kunjungan', 'DESC')
-            ->get();
-
-        $toko = null;
-        if ($toko_id) {
-            $toko = Toko::find($toko_id);
-        }
-
         $totalNilai = $kunjungan->sum('total_nilai');
         $totalQty = $kunjungan->sum('total_qty');
 
@@ -229,66 +167,27 @@ class HistoriTokoController extends Controller
             'tanggal_akhir',
             'totalNilai',
             'totalQty'
-        ));
+        ))->setPaper('a4', 'landscape');
 
-        $filename = 'histori-kunjungan-' . date('YmdHis') . '.pdf';
-
-        return $pdf->download($filename);
+        return $pdf->download('histori-kunjungan-' . date('YmdHis') . '.pdf');
     }
 
     /**
-     * Get statistics for dashboard or specific toko
+     * Query dasar kunjungan dengan filter toko_id, tanggal_awal, tanggal_akhir
      */
-    public function getStatistics(Request $request)
+    private function filteredQuery(Request $request)
     {
-        $toko_id = $request->get('toko_id');
-        $bulan = $request->get('bulan', date('m'));
-        $tahun = $request->get('tahun', date('Y'));
-
-        $query = Kunjungan::whereMonth('tanggal_kunjungan', $bulan)
-            ->whereYear('tanggal_kunjungan', $tahun);
-
-        if ($toko_id) {
-            $query->where('toko_id', $toko_id);
-        }
-
-        $totalKunjungan = $query->count();
-        $totalNilai = $query->sum('total_nilai');
-        $rataRataNilai = $totalKunjungan > 0 ? $totalNilai / $totalKunjungan : 0;
-
-        return response()->json([
-            'total_kunjungan' => $totalKunjungan,
-            'total_nilai' => $totalNilai,
-            'rata_rata_nilai' => $rataRataNilai,
-        ]);
-    }
-
-    /**
-     * Get produk terlaris per toko
-     */
-    public function getProdukTerlaris(string $toko_id, Request $request)
-    {
-        $limit = $request->get('limit', 10);
-        $bulan = $request->get('bulan');
-        $tahun = $request->get('tahun');
-
-        $query = Produk::select('produk.*')
-            ->join('kunjungan_details', 'produk.id', '=', 'kunjungan_details.produk_id')
-            ->join('kunjungans', 'kunjungan_details.kunjungan_id', '=', 'kunjungans.id')
-            ->where('kunjungans.toko_id', $toko_id);
-
-        if ($bulan && $tahun) {
-            $query->whereMonth('kunjungans.tanggal_kunjungan', $bulan)
-                  ->whereYear('kunjungans.tanggal_kunjungan', $tahun);
-        }
-
-        $produk = $query->selectRaw('SUM(kunjungan_details.qty) as total_qty')
-            ->selectRaw('SUM(kunjungan_details.subtotal) as total_nilai')
-            ->groupBy('produk.id')
-            ->orderBy('total_qty', 'DESC')
-            ->limit($limit)
-            ->get();
-
-        return response()->json($produk);
+        return Kunjungan::query()
+            ->when($request->filled('toko_id'), function ($q) use ($request) {
+                $q->where('toko_id', $request->toko_id);
+            })
+            ->when($request->filled('tanggal_awal'), function ($q) use ($request) {
+                $q->whereDate('tanggal_kunjungan', '>=', $request->tanggal_awal);
+            })
+            ->when($request->filled('tanggal_akhir'), function ($q) use ($request) {
+                $q->whereDate('tanggal_kunjungan', '<=', $request->tanggal_akhir);
+            })
+            ->orderBy('tanggal_kunjungan', 'DESC')
+            ->orderBy('id', 'DESC');
     }
 }

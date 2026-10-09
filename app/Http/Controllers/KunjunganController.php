@@ -202,12 +202,13 @@ class KunjunganController extends Controller
         ]);
     }
 
+    /**
+     * Edit dilakukan lewat modal di halaman daftar kunjungan.
+     * Route ini hanya mengalihkan agar tidak error (view kunjungan.edit tidak ada).
+     */
     public function edit(string $id)
     {
-        $kunjungan = Kunjungan::with('detail')->findOrFail($id);
-        $toko      = Toko::orderBy('nama_toko')->get();
-        $produk    = Produk::orderBy('nama_produk')->get();
-        return view('kunjungan.edit', compact('kunjungan', 'toko', 'produk'));
+        return redirect()->route('kunjungan.index');
     }
 
     public function update(Request $request, string $id)

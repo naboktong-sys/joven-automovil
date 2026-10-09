@@ -70,6 +70,7 @@
 
 @push('scripts')
 <script>
+    const PLACEHOLDER_IMG = '{{ asset('img/product-placeholder.svg') }}';
     let table;
 
     $(function () {
@@ -157,16 +158,7 @@
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=nama_produk]').focus();
 
-        $('#modal-form .preview').hide();
-
-        $.get(url)
-            .done((response) => {
-                $('#modal-form [name=kode_produk]').val(response);
-            })
-            .fail((errors) => {
-                showNotification('error', 'Gagal!', 'Tidak dapat menghasilkan kode produk');
-                return;
-            });
+        $('#preview-img').attr('src', PLACEHOLDER_IMG);
     }
 
     function editForm(url) {
@@ -188,12 +180,7 @@
                 $('#modal-form [name=stok]').val(response.stok);
                 $('#modal-form [name=kode_produk]').val(response.kode_produk);
 
-                if (response.gambar) {
-                    $('#modal-form .preview').show();
-                    $('#modal-form .preview img').attr('src', response.gambar);
-                } else {
-                    $('#modal-form .preview').hide();
-                }
+                $('#preview-img').attr('src', response.gambar ? response.gambar_url : PLACEHOLDER_IMG);
             })
             .fail((errors) => {
                 showNotification('error', 'Gagal!', 'Tidak dapat menampilkan data');
@@ -255,7 +242,6 @@
             if (result.isConfirmed) {
                 $.post(url, {
                         '_token': $('[name=csrf-token]').attr('content'),
-                        '_method': 'delete',
                         'id_produk': ids
                     })
                     .done((response) => {
@@ -281,7 +267,15 @@
             return;
         }
 
-        window.open(url + '?id_produk=' + ids.join(','), '_blank');
+        // Route cetak barcode bertipe POST, kirim lewat form di tab baru
+        var $form = $('<form method="POST" target="_blank" style="display:none"></form>').attr('action', url);
+        $form.append($('<input type="hidden" name="_token">').val($('[name=csrf-token]').attr('content')));
+        ids.forEach(function (id) {
+            $form.append($('<input type="hidden" name="id_produk[]">').val(id));
+        });
+        $('body').append($form);
+        $form.trigger('submit');
+        $form.remove();
     }
 
     // Notification helper function

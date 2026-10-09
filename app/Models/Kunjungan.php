@@ -158,6 +158,6 @@ class Kunjungan extends Model
      */
     public function getFotoUrlAttribute()
     {
-        return get_foto_url('kunjungan', $this->foto_kunjungan, 'default-visit.png');
+        return get_foto_url('kunjungan', $this->foto_kunjungan, 'default-visit.svg');
     }
 }

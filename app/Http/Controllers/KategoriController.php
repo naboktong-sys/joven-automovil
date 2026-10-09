@@ -109,7 +109,14 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori = Kategori::find($id);
+        $kategori = Kategori::findOrFail($id);
+
+        if (\App\Models\Produk::where('id_kategori', $id)->exists()) {
+            return response()->json([
+                'message' => 'Kategori tidak dapat dihapus karena masih dipakai oleh produk'
+            ], 422);
+        }
+
         $kategori->delete();
 
         return response(null, 204);

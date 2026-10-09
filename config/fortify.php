@@ -132,14 +132,9 @@ return [
     */
 
     'features' => [
-        Features::registration(),
-        Features::resetPasswords(),
-        // Features::emailVerification(),
-        Features::updateProfileInformation(),
-        Features::updatePasswords(),
-        Features::twoFactorAuthentication([
-            'confirmPassword' => true,
-        ]),
+        // Aplikasi internal: akun dibuat admin lewat menu Manajemen User,
+        // jadi registrasi, reset password via email, dan 2FA dimatikan.
+        // Profil & ganti password ditangani UserController@updateProfil.
     ],
 
 ];

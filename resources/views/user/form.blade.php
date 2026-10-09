@@ -57,6 +57,24 @@
                         <span class="help-block with-errors"></span>
                     </div>
 
+                    <!-- Level -->
+                    <div class="form-group">
+                        <label for="level" class="form-label required">
+                            <i class="fa fa-shield"></i>
+                            Level
+                        </label>
+                        <div class="input-group-modern">
+                            <span class="input-icon">
+                                <i class="fa fa-shield"></i>
+                            </span>
+                            <select name="level" id="level" class="form-control modern-input" required>
+                                <option value="2">Sales</option>
+                                <option value="1">Admin</option>
+                            </select>
+                        </div>
+                        <span class="help-block with-errors"></span>
+                    </div>
+
                     <!-- Password -->
                     <div class="form-group">
                         <label for="password" class="form-label required">

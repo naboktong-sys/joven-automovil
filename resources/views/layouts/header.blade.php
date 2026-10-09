@@ -27,7 +27,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <div class="user-avatar">
-                            <img src="{{ url(auth()->user()->foto ?? '') }}" class="user-image img-profil" alt="User Image">
+                            <img src="{{ url(auth()->user()->foto ?: '/img/user.svg') }}" class="user-image img-profil" alt="User Image">
                             <span class="status-indicator"></span>
                         </div>
                         <span class="user-name hidden-xs">{{ auth()->user()->name }}</span>
@@ -37,7 +37,7 @@
                         <!-- User image -->
                         <li class="user-header">
                             <div class="user-avatar-large">
-                                <img src="{{ url(auth()->user()->foto ?? '') }}" class="img-circle img-profil" alt="User Image">
+                                <img src="{{ url(auth()->user()->foto ?: '/img/user.svg') }}" class="img-circle img-profil" alt="User Image">
                                 <span class="status-indicator-large"></span>
                             </div>
                             <p class="user-info">

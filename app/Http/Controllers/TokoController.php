@@ -22,7 +22,7 @@ class TokoController extends Controller
      */
     public function data()
     {
-        $toko = Toko::orderBy('nama_toko', 'ASC')->get();
+        $toko = Toko::withCount('kunjungan')->orderBy('nama_toko', 'ASC')->get();
 
         return DataTables::of($toko)
             ->addIndexColumn()
@@ -46,12 +46,15 @@ class TokoController extends Controller
                 return \Str::limit($toko->alamat, 50);
             })
             ->addColumn('total_kunjungan', function ($toko) {
-                $count = $toko->kunjungan()->count();
+                $count = $toko->kunjungan_count;
                 return '<span class="badge badge-info">'. $count .' kunjungan</span>';
             })
             ->addColumn('aksi', function ($toko) {
                 return '
                 <div class="btn-group">
+                    <a href="'. route('toko.histori', $toko->id) .'" class="btn btn-xs btn-info btn-flat" title="Histori Kunjungan">
+                        <i class="fa fa-history"></i> Histori
+                    </a>
                     <button type="button" onclick="editForm(`'. route('toko.update', $toko->id) .'`)" class="btn btn-xs btn-warning btn-flat" title="Edit Toko">
                         <i class="fa fa-edit"></i> Edit
                     </button>

@@ -14,14 +14,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        view()->composer('layouts.master', function ($view) {
-            $view->with('setting', Setting::first());
+        // Jika tabel setting masih kosong, pakai nilai default agar halaman tidak error
+        $setting = function () {
+            return Setting::first() ?? (new Setting())->forceFill([
+                'nama_perusahaan' => config('app.name', 'Buku Kunjungan Sales'),
+                'alamat'          => '',
+                'telepon'         => '',
+                'path_logo'       => '/img/logo.png',
+            ]);
+        };
+
+        view()->composer('layouts.master', function ($view) use ($setting) {
+            $view->with('setting', $setting());
         });
-        view()->composer('layouts.auth', function ($view) {
-            $view->with('setting', Setting::first());
+        view()->composer('layouts.auth', function ($view) use ($setting) {
+            $view->with('setting', $setting());
         });
-        view()->composer('auth.login', function ($view) {
-            $view->with('setting', Setting::first());
+        view()->composer('auth.login', function ($view) use ($setting) {
+            $view->with('setting', $setting());
         });
     }
 

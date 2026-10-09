@@ -5,7 +5,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="user-panel-avatar">
-                <img src="{{ url(auth()->user()->foto ?? '/img/user.jpg') }}" class="img-circle img-profil" alt="User Image">
+                <img src="{{ url(auth()->user()->foto ?: '/img/user.svg') }}" class="img-circle img-profil" alt="User Image">
                 <span class="user-status-badge"></span>
             </div>
             <div class="user-panel-info">
@@ -106,14 +106,13 @@
                 <span class="header-line"></span>
             </li>
 
-            @if (auth()->user()->level == 1)
+            @if (auth()->user()->isAdmin())
             <li class="menu-item {{ request()->is('user*') && !request()->is('user/profil') ? 'active' : '' }}">
                 <a href="{{ route('user.index') }}" class="menu-link">
                     <i class="fa fa-users menu-icon"></i>
                     <span class="menu-text">Manajemen User</span>
                 </a>
             </li>
-            @endif
 
             <li class="menu-item {{ request()->is('setting*') ? 'active' : '' }}">
                 <a href="{{ route('setting.index') }}" class="menu-link">
@@ -121,6 +120,7 @@
                     <span class="menu-text">Pengaturan</span>
                 </a>
             </li>
+            @endif
 
             <li class="menu-item {{ request()->is('profil') || request()->is('user/profil') ? 'active' : '' }}">
                 <a href="{{ route('user.profil') }}" class="menu-link">

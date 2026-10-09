@@ -28,7 +28,7 @@ class Produk extends Model
         if ($this->gambar && Storage::disk('public')->exists($this->gambar)) {
             return Storage::url($this->gambar);
         }
-        return asset('img/product-placeholder.png'); // Default placeholder
+        return asset('img/product-placeholder.svg'); // Default placeholder
     }
 
     // Event untuk hapus gambar saat produk dihapus
